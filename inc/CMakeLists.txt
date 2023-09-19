@@ -1,0 +1,1 @@
+set(titleRating titleRating.hh)
