@@ -52,14 +52,11 @@ class heap{
 
     public:     
     
-    
-
-    template<storedElement, key>
     heap<storedElement, key>() {
         _elementsCollection = new storedElement*[initialSize];
     }
 
-    ~heap<storedElement, key>() {
+    virtual ~heap<storedElement, key>() {
         
         for ( int i = 0; i < _recordsNumber; ++i )
             delete _elementsCollection[i];
@@ -67,13 +64,23 @@ class heap{
         delete [] _elementsCollection;
     }
 
+    /* Interface elements */
+    storedElement& operator[](int index) { return _elementsCollection[index];}
+
+    int getRecordsNumber () const { return _recordsNumber; }
+ 
+    int& getRecordsNumber () { return _recordsNumber; }
+
+    int getVectorSize () const { return _vectorSize; }
+
+    int& getVectorSize () { return _vectorSize; }
+
+
     void maxHeapify ( int i );
 
     void buildMaxHeap ();
 
     void heapsort();
-
-    int getRecordsNumber () { return _recordsNumber; }
 
     /*!
         \brief Method for reading data from input file
@@ -144,19 +151,6 @@ void heap<storedElement, key>::buildMaxHeap()
 {
     for ( int i = _vectorSize/2; i >= 0; --i ){
         maxHeapify(i);
-    }
-}
-
-/* Heapstore */
-template <typename storedElement, typename key>
-void heap<storedElement, key>::heapsort(){
-
-    int tmpRecordsNumber = _recordsNumber;
-
-    buildMaxHeap();
-
-    for ( int i = tmpRecordsNumber; i > 0; --i){
-
     }
 }
 

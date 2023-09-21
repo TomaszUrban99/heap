@@ -6,4 +6,4 @@ add_subdirectory(inc)
 
 add_executable(heap src/main.cpp)
 target_link_directories(heap PUBLIC inc/)
-target_link_libraries(heap PUBLIC titleRatingCollection)
+target_link_libraries(heap PUBLIC titleRating)
