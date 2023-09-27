@@ -12,5 +12,13 @@ int main(int argc, char* argv[])
     priority.read(argv[1]);
     priority.buildMaxHeap();
     
+
+    priority.print(std::cout);
+
+    priority.heapIncreaseKey(7, 8);
+
+    std::cout << "After increasing key: " << std::endl;
+    priority.print(std::cout);
+
     return 0;
 }

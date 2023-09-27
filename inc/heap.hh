@@ -29,6 +29,10 @@ class heap{
     */
     int reallocate();
 
+
+
+    public:
+    
     /*!
         \brief Method returning parent's index of node with index i.
     */
@@ -48,9 +52,7 @@ class heap{
     */
     int right ( int i ){
         return 2 * i + 2;
-    }
-
-    public:     
+    }     
     
     heap<storedElement, key>() {
         _elementsCollection = new storedElement*[initialSize];
@@ -199,6 +201,14 @@ int heap<storedElement, key>::read(char *filename)
     }
 
     return _recordsNumber;
+}
+
+template<typename StoredElement, typename key>
+void heap<StoredElement, key>::print(std::ostream& outputStream)
+{
+    for ( int i = 0; i < _recordsNumber; ++i ){
+        outputStream << *(_elementsCollection[i]) << std::endl;
+    }
 }
 
 #endif
