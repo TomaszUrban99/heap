@@ -20,7 +20,9 @@ class titleRating {
 
     public:
 
-    titleRating() {}
+    titleRating() {
+        std::cout << "Tconst id: " << _tconst << std::endl; 
+    }
 
     ~titleRating() {
     }
@@ -28,6 +30,10 @@ class titleRating {
     std::string& get_tconst () { return _tconst; }
 
     float& get_averageRating () { return _averageRating; }
+
+    float& getKey () { return _averageRating; }
+
+    float getKey() const { return _averageRating; }
 
     int& get_numVotes () { return _numVotes; }
 

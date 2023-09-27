@@ -65,7 +65,9 @@ class heap{
     }
 
     /* Interface elements */
-    storedElement& operator[](int index) { return _elementsCollection[index];}
+    storedElement* operator[](int index) { return _elementsCollection[index];}
+
+    storedElement** getElementsCollection () { return _elementsCollection; }
 
     int getRecordsNumber () const { return _recordsNumber; }
  
@@ -75,6 +77,10 @@ class heap{
 
     int& getVectorSize () { return _vectorSize; }
 
+    /* Substract one from numbers of records */
+    void lessRecordsNumber () {
+        _recordsNumber = _recordsNumber - 1;
+     }
 
     void maxHeapify ( int i );
 
@@ -152,6 +158,47 @@ void heap<storedElement, key>::buildMaxHeap()
     for ( int i = _vectorSize/2; i >= 0; --i ){
         maxHeapify(i);
     }
+}
+
+/* Read data from file */
+template <typename storedElement, typename key>
+int heap<storedElement, key>::read(char *filename)
+{
+    /* Create input handle to the file with given filename */
+    std::ifstream input ( filename );
+    
+    if (input.fail()){
+        std::cerr << "Failed to open the file";
+        return -1;
+    }
+    
+    /* Omit headers */
+    char readCharacter = 'o';
+        while ( readCharacter != '\n'){
+           input.get(readCharacter);
+        }
+
+    /* Read data */
+    while (!input.eof())
+    { 
+        /* Check if there is enough space to store records */
+        if ( _recordsNumber >=_vectorSize ){
+            reallocate();     
+        }
+
+        _elementsCollection[_recordsNumber] = new storedElement (); 
+        input >> *_elementsCollection[_recordsNumber];
+
+        if (input.fail() && !input.eof()){
+            std::cerr << "Failed to read data" << std::endl;
+            return -1;
+        }
+        else {
+          _recordsNumber++;  
+        }  
+    }
+
+    return _recordsNumber;
 }
 
 #endif
